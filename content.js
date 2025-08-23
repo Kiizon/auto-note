@@ -188,7 +188,7 @@ if (window.top === window) {
         .resizer:hover { background: rgba(79,70,229,.08); }
       </style>
   
-      <button part="fab" class="fab" id="fab" title="Open summarizer (Alt+S)">Summarize <strong>Alt+S</strong></button>
+      <button part="fab" class="fab" id="fab" title="Open summarizer (Shift+S)">Summarize <strong>Shift+S</strong></button>
   
       <div class="wrap" id="wrap" aria-hidden="true">
         <div class="panel" role="dialog" aria-label="Caption Summarizer" aria-modal="false">
