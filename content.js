@@ -125,7 +125,7 @@ if (window.top === window) {
   
         .close {
           width: 28px; height: 28px; border-radius: 8px;
-          display: grid; place-items: center; background:#ffffff; border:1px solid var(--border);
+          display: grid; place-items: center; background:#ffffff; border:2px solid var(--border);
         }
   
         .body {
@@ -194,7 +194,7 @@ if (window.top === window) {
         <div class="panel" role="dialog" aria-label="Caption Summarizer" aria-modal="false">
           <div class="resizer" id="resizer" aria-hidden="true"></div>
           <div class="header">
-            <div class="title">Caption Summarizer</div>
+            <div class="title">TMU Lecture Summarizer</div>
             <div class="spacer"></div>
             <button class="btn" id="btnSummarize">Summarize</button>
             <button class="close" id="btnClose" aria-label="Close">✕</button>
