@@ -37,6 +37,10 @@
     console.log(lines.join('\n'));
   })();
 
+if (window.top === window) {
+    createSummarizerPanel();
+    bindGlobalHotkeys();
+  }
   
   /** shadow dom panel */
   function createSummarizerPanel() {
@@ -362,8 +366,19 @@
     });
   }
   
-
-  console.log("[summarizer] content script loaded"); // sanity log
+  /* shift + s to open/close panel */
+  function bindGlobalHotkeys() {
+    document.addEventListener('keydown', (e) => {
+      if (e.shiftKey && (e.key.toLowerCase() === 's')) {
+        const host = document.getElementById('cs-root-host');
+        const wrap = host?.shadowRoot?.querySelector('#wrap');
+        if (wrap) {
+          host.shadowRoot.querySelector('#fab').click();
+          e.preventDefault();
+        }
+      }
+    }, true);
+  }
 
 
 function ensurePanel() {
