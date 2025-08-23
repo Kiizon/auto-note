@@ -169,7 +169,7 @@ if (window.top === window) {
           padding: 10px 12px; border-radius: 10px; box-shadow: var(--shadow);
           transform: translateY(8px); opacity: 0; transition: .2s ease;
         }
-        .toast.show { transform: translateY(0); opacity: 1; }
+        .toast.show { transform: translateY(0); opacity: 1; background: #cbd5ff; }
   
         /* Skeleton loader */
         .skeleton { display: grid; gap: 10px; }
