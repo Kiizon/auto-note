@@ -1,18 +1,13 @@
 {
     "manifest_version": 3,
-    "name": "Caption Summarizer",
-    "version": "0.1.0",
-    "description": "Summarize any captioned video (D2L, LMS, YouTube with captions).",
-    "action": { "default_popup": "popup.html" },
-    "permissions": ["scripting", "activeTab", "storage"],
-    "host_permissions": [
-      "*://*.torontomu.ca/d2l/*",
-      "*://courses.torontomu.ca/d2l/*",
-      "*://*/d2l/*",
-      "https://your-backend.example.com/*"
-    ],
+    "name": "Summarizer Test",
+    "version": "0.0.1",
+    "action": {},
+    "background": { "service_worker": "bg.js" },
+    "permissions": ["activeTab", "scripting", "tabs"],
+    "host_permissions": ["<all_urls>"],
     "content_scripts": [{
-      "matches": ["*://*.torontomu.ca/d2l/*", "*://*/d2l/*"],
+      "matches": ["<all_urls>"],
       "js": ["content.js"],
       "run_at": "document_idle",
       "all_frames": true
