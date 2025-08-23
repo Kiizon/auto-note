@@ -112,7 +112,7 @@ if (window.top === window) {
   
         .btn {
           appearance: none; border: 1px solid var(--border);
-          background: #11131a; color: var(--text);
+          background: #ffffff; color: var(--text);
           padding: 8px 12px; border-radius: 10px; cursor: pointer;
           transition: transform .06s ease, border-color .2s ease;
         }
@@ -125,7 +125,7 @@ if (window.top === window) {
   
         .close {
           width: 28px; height: 28px; border-radius: 8px;
-          display: grid; place-items: center; background:#12141c; border:1px solid var(--border);
+          display: grid; place-items: center; background:#ffffff; border:1px solid var(--border);
         }
   
         .body {
