@@ -245,6 +245,9 @@ if (window.top === window) {
             class="api-key-input"
             style="width: 200px; margin-right: 8px;"
             />
+
+            <button class="btn" id="btnSaveKey" style="margin-right: 8px;">Save Key</button>
+
             <button class="btn" id="btnSummarize">Summarize</button>
             <button class="close" id="btnClose" aria-label="Close">✕</button>
           </div>
@@ -295,8 +298,22 @@ if (window.top === window) {
   
       <div class="toast" id="toast"></div>
     `;
-  
     const $ = (sel) => shadow.querySelector(sel);
+    const btnSaveKey = $('#btnSaveKey');
+    btnSaveKey.addEventListener('click', () => {
+      localStorage.setItem('openai_api_key', $('#apiKeyInput').value);
+      showToast('Key saved');
+      console.log('Key saved');
+    });
+    window.addEventListener('load', () => {
+      const savedKey = localStorage.getItem('openai_api_key');
+      if (savedKey) {
+        document.getElementById('apiKeyInput').value = savedKey;
+      }
+    });
+
+  
+    
     const wrap = $('#wrap'), fab = $('#fab');
     const btnSummarize = $('#btnSummarize'), btnClose = $('#btnClose');
     const empty = $('#empty'), result = $('#result'), loading = $('#loading'), error = $('#error'), errText = $('#errText');
