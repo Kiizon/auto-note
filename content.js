@@ -359,7 +359,7 @@ if (window.top === window) {
       host.style.width = newW + 'px';
       wrap.style.width = newW + 'px';
 
-      shadow.host.style.width.setProperty('--panel-w', newW + 'px');
+      shadow.host.style.setProperty('--panel-w', newW + 'px');
     }
     function onStop() {
       resizing = false; document.removeEventListener('mousemove', onDrag); document.removeEventListener('mouseup', onStop);
