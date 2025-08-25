@@ -2,7 +2,6 @@
 
  async function getTranscript() {
 
-
     const track = Array.from(document.querySelectorAll('track'))
       .find(t => /captions|subtitles/i.test(t.kind));
     if (!track) { console.log('No <track> found'); return; }
@@ -33,20 +32,8 @@
       const stamp = (hh*60 + mm) + ':' + String(ss).padStart(2,'0');
       return `[${stamp}] ${text}`;
     }).filter(Boolean);
-  
-    console.log(lines.join('\n'));
-  }
-  async function validateApiKey() {
-    const apiKey = document.getElementById('apiKeyInput').value;
-    if (!apiKey) {
-      showToast('Please enter your OpenAI API key');
-      return false;
-    }
-    if (!apiKey.startsWith('sk-')) {
-      showToast('Invalid API key format');
-      return false;
-    }
-    return true;
+    
+    return lines.join('\n');
   }
 
 if (window.top === window) {
@@ -312,6 +299,18 @@ if (window.top === window) {
       }
     });
 
+    async function validateApiKey() {
+      const apiKey = $('#apiKeyInput').value;
+      if (!apiKey) {
+        showToast('Please enter your OpenAI API key');
+        return false;
+      }
+      if (!apiKey.startsWith('sk-')) {
+        showToast('Invalid API key format');
+        return false;
+      }
+      return true;
+    }
   
     
     const wrap = $('#wrap'), fab = $('#fab');
@@ -323,19 +322,53 @@ if (window.top === window) {
     fab.addEventListener('click', togglePanel);
     btnClose.addEventListener('click', togglePanel);
 
-    btnSummarize.addEventListener('click', () => {
+    btnSummarize.addEventListener('click', async () => {
       if (!validateApiKey()) return;
       setLoading(true);
       try {
-        const lectureTranscript = getTranscript();
-        console.log(lectureTranscript);
-        
+        const apiKey = $('#apiKeyInput').value;
+        const lectureTranscript = await getTranscript();
+    
+        const prompt = `Summarize the following lecture captions and provide:
+    1. A brief TL;DR summary
+    2. Key takeaways with timestamps
+    3. 2-3 practice questions
+    
+    Captions:
+    ${lectureTranscript}`;
+    
+        const response = await fetch('https://api.openai.com/v1/chat/completions', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${apiKey}` 
+          },
+          body: JSON.stringify({
+            model: 'gpt-4',  // or 'gpt-3.5-turbo'
+            messages: [
+              { role: 'system', content: 'You are a helpful assistant.' },
+              { role: 'user', content: prompt }
+            ],
+            temperature: 0.7
+          })
+        });
+    
+        const data = await response.json();
+        console.log(data);
+    
+        const reply = data.choices[0].message.content;
+        showToast('Summary complete!');
+        // You can also show the reply in the UI
+        console.log('GPT Reply:', reply);
+    
       } catch (error) {
-        console.error('Error getting transcript:', error);
+        console.error('Error calling OpenAI:', error);
+        showToast('Error summarizing.');
+      } finally {
+        setLoading(false);
       }
-      
-      showToast('Summarizing…');
     });
+    
 
 
     btnClear.addEventListener('click', clearUI);
