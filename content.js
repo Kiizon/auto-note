@@ -36,6 +36,18 @@
   
     console.log(lines.join('\n'));
   }
+  async function validateApiKey() {
+    const apiKey = document.getElementById('apiKeyInput').value;
+    if (!apiKey) {
+      showToast('Please enter your OpenAI API key');
+      return false;
+    }
+    if (!apiKey.startsWith('sk-')) {
+      showToast('Invalid API key format');
+      return false;
+    }
+    return true;
+  }
 
 if (window.top === window) {
     createSummarizerPanel();
@@ -198,6 +210,13 @@ if (window.top === window) {
           <div class="header">
             <div class="title">TMU Lecture Summarizer</div>
             <div class="spacer"></div>
+            <input 
+            type="text"
+            id="apiKeyInput"
+            placeholder="Enter OpenAI API Key"
+            class="api-key-input"
+            style="width: 200px; margin-right: 8px;"
+            />
             <button class="btn" id="btnSummarize">Summarize</button>
             <button class="close" id="btnClose" aria-label="Close">✕</button>
           </div>
@@ -260,10 +279,12 @@ if (window.top === window) {
     btnClose.addEventListener('click', togglePanel);
 
     btnSummarize.addEventListener('click', () => {
+      if (!validateApiKey()) return;
       setLoading(true);
       try {
         const lectureTranscript = getTranscript();
         console.log(lectureTranscript);
+        
       } catch (error) {
         console.error('Error getting transcript:', error);
       }
