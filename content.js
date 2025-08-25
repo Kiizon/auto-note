@@ -308,7 +308,7 @@ if (window.top === window) {
     window.addEventListener('load', () => {
       const savedKey = localStorage.getItem('openai_api_key');
       if (savedKey) {
-        document.getElementById('apiKeyInput').value = savedKey;
+        $('#apiKeyInput').value = savedKey;
       }
     });
 
