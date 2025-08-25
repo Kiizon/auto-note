@@ -200,6 +200,34 @@ if (window.top === window) {
           cursor: ew-resize; background: transparent;
         }
         .resizer:hover { background: rgba(79,70,229,.08); }
+.api-key-input {
+  background: #ffffff;  /* Match button background */
+  border: 1px solid var(--border);
+  color: var(--text);  /* This should be dark text on white background */
+  padding: 8px 12px;
+  border-radius: 10px;
+  font-size: 14px;
+  outline: none;
+  transition: border-color 0.2s ease, transform 0.06s ease;
+  width: 200px;
+  margin-right: 8px;
+}
+
+.api-key-input:focus {
+  border-color: var(--accent);
+}
+
+.api-key-input:hover {
+  border-color: #2d3342; /* Match button hover effect */
+}
+
+.api-key-input:active {
+  transform: translateY(1px); /* Match button active effect */
+}
+
+.api-key-input::placeholder {
+  color: var(--muted);
+}
       </style>
   
       <button part="fab" class="fab" id="fab" title="Open summarizer (Shift+S)">Summarize <strong>Shift+S</strong></button>
@@ -211,7 +239,7 @@ if (window.top === window) {
             <div class="title">TMU Lecture Summarizer</div>
             <div class="spacer"></div>
             <input 
-            type="text"
+            type="password"
             id="apiKeyInput"
             placeholder="Enter OpenAI API Key"
             class="api-key-input"
@@ -222,7 +250,7 @@ if (window.top === window) {
           </div>
           <div class="body" id="body">
             <div class="empty" id="empty">
-              Click <b>Summarize</b> to generate notes for the current video.<br/>
+              Enter your <b> api key </b> and click <b>Summarize</b> to generate notes for the current video.<br/>
               Tip: ensure captions (CC) are enabled on the player.
             </div>
   
