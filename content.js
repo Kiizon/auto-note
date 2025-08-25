@@ -159,6 +159,7 @@ if (window.top === window) {
           border: 1px solid var(--border);
           padding: 10px 14px; border-radius: 12px; cursor: pointer;
           box-shadow: var(--shadow);
+          color: #cbd5ff;
         }
         .fab strong { background: #1f2534; padding: 0 6px; border-radius: 6px; margin-left: 6px; color: #cbd5ff; }
   
@@ -216,7 +217,7 @@ if (window.top === window) {
 }
       </style>
   
-      <button part="fab" class="fab" id="fab" title="Open summarizer (Shift+S)">Summarize <strong>Shift+S</strong></button>
+      <button part="fab" class="fab" id="fab" title="Open summarizer (Shift+S)"> Summarize <strong >Shift+S</strong></button>
   
       <div class="wrap" id="wrap" aria-hidden="true">
         <div class="panel" role="dialog" aria-label="Caption Summarizer" aria-modal="false">
@@ -331,7 +332,7 @@ if (window.top === window) {
         const prompt = `Summarize the following lecture captions and provide: 
         A high-level summary of the lecture’s purpose and main themes (2–3 sentences).
         A breakdown of the main topics discussed, with brief explanations and any key terms or examples.
-        3–5 major takeaways or insights from the lecture.
+
         Any practical applications, questions raised, or further reading suggestions (if mentioned).
         The summary should be in a concise and easy-to-understand format.
         Captions:
@@ -402,7 +403,6 @@ if (window.top === window) {
       host.style.pointerEvents = opened ? 'auto' : 'none';
       // Initialize default width
       //if (!host.style.width) { host.style.width = getComputedStyle(shadow.host).getPropertyValue('--panel-w') || '380px'; }
-      console.log("togglePanel", opened);
     }
   
     function setLoading(is) {
