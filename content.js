@@ -239,11 +239,11 @@ if (window.top === window) {
             <div class="title">TMU Lecture Summarizer</div>
             <div class="spacer"></div>
             <input 
-            type="password"
+            type="text"
             id="apiKeyInput"
             placeholder="Enter OpenAI API Key"
             class="api-key-input"
-            style="width: 200px; margin-right: 8px;"
+            style="width: 200px; margin-right: 8px; -webkit-text-security: disc;"
             />
 
             <button class="btn" id="btnSaveKey" style="margin-right: 8px;">Save Key</button>
