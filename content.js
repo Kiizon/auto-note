@@ -333,10 +333,13 @@ if (window.top === window) {
         A high-level summary of the lecture’s purpose and main themes (2–3 sentences).
         A breakdown of the main topics discussed, with brief explanations and any key terms or examples.
 
-        Any practical applications, questions raised, or further reading suggestions (if mentioned).
-        The summary should be in a concise and easy-to-understand format.
-        Captions:
-        ${lectureTranscript}`;
+{
+  "summary": "Brief overview of the lecture",
+  "main_points": ["Point 1", "Point 2", "Point 3"],
+  "takeaways": ["Takeaway 1", "Takeaway 2", "Takeaway 3"]
+}
+
+Captions: ${lectureTranscript}`;
     
         const response = await fetch('https://api.openai.com/v1/chat/completions', {
           method: 'POST',
