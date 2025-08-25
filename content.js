@@ -32,7 +32,6 @@
       const stamp = (hh*60 + mm) + ':' + String(ss).padStart(2,'0');
       return `[${stamp}] ${text}`;
     }).filter(Boolean);
-    
     return lines.join('\n');
   }
 
@@ -329,13 +328,14 @@ if (window.top === window) {
         const apiKey = $('#apiKeyInput').value;
         const lectureTranscript = await getTranscript();
     
-        const prompt = `Summarize the following lecture captions and provide:
-    1. A brief TL;DR summary
-    2. Key takeaways with timestamps
-    3. 2-3 practice questions
-    
-    Captions:
-    ${lectureTranscript}`;
+        const prompt = `Summarize the following lecture captions and provide: 
+        A high-level summary of the lecture’s purpose and main themes (2–3 sentences).
+        A breakdown of the main topics discussed, with brief explanations and any key terms or examples.
+        3–5 major takeaways or insights from the lecture.
+        Any practical applications, questions raised, or further reading suggestions (if mentioned).
+        The summary should be in a concise and easy-to-understand format.
+        Captions:
+        ${lectureTranscript}`;
     
         const response = await fetch('https://api.openai.com/v1/chat/completions', {
           method: 'POST',
@@ -344,7 +344,7 @@ if (window.top === window) {
             'Authorization': `Bearer ${apiKey}` 
           },
           body: JSON.stringify({
-            model: 'gpt-4',  // or 'gpt-3.5-turbo'
+            model: 'gpt-4',
             messages: [
               { role: 'system', content: 'You are a helpful assistant.' },
               { role: 'user', content: prompt }
@@ -357,8 +357,6 @@ if (window.top === window) {
         console.log(data);
     
         const reply = data.choices[0].message.content;
-        showToast('Summary complete!');
-        // You can also show the reply in the UI
         console.log('GPT Reply:', reply);
     
       } catch (error) {
