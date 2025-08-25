@@ -330,16 +330,41 @@ if (window.top === window) {
         const lectureTranscript = await getTranscript();
     
         const prompt = `Summarize the following lecture captions and provide: 
+
         A high-level summary of the lecture’s purpose and main themes (2–3 sentences).
         A breakdown of the main topics discussed, with brief explanations and any key terms or examples.
 
-{
-  "summary": "Brief overview of the lecture",
-  "main_points": ["Point 1", "Point 2", "Point 3"],
-  "takeaways": ["Takeaway 1", "Takeaway 2", "Takeaway 3"]
-}
+        Any practical applications, questions raised, or further reading suggestions (if mentioned).
+        The summary should be in a concise and easy-to-understand format.
 
-Captions: ${lectureTranscript}`;
+        Return ONLY a valid JSON object with this exact structure:
+        {
+          "summary": "A concise 2-3 sentence overview of the lecture's main purpose and key themes",
+          "topics": [
+            "First main topic with brief explanation",
+            "Second main topic with key terms or examples",
+            "Third main topic with important details"
+          ],
+          "key_terms": [
+            "Important term 1: brief definition",
+            "Important term 2: brief definition",
+            "Important term 3: brief definition"
+          ],
+          "practical_applications": [
+            "First practical application or question for further thought",
+            "Second practical application or reading suggestion",
+            "Third practical application or next steps"
+          ]
+        }
+
+
+        Requirements:
+        - Keep each item concise (2-3 sentences max)
+        - Ensure the response is valid JSON (no extra text before or after)
+        - Focus on the most important information from the captions
+        - Make the content educational and actionable
+        Captions:
+        ${lectureTranscript}`;
     
         const response = await fetch('https://api.openai.com/v1/chat/completions', {
           method: 'POST',
@@ -448,10 +473,6 @@ Captions: ${lectureTranscript}`;
     }
   
   
-    function escapeHtml(s) {
-      return (s || '').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
-    }
-  
     window.addEventListener('message', (e) => {
       const d = e?.data;
       if (!d) return;
@@ -479,20 +500,4 @@ Captions: ${lectureTranscript}`;
     }, true);
   }
 
-
-function ensurePanel() {
-    if (window.top !== window) return;
-    if (!document.getElementById('cs-root-host')) {
-      createSummarizerPanel();
-    }
-  }
-  
-  chrome.runtime.onMessage.addListener((msg) => {
-    if (msg?.type !== "CS_TOGGLE_PANEL") return;
-    if (window.top !== window) return;
-    if (!document.getElementById('cs-root-host')) createSummarizerPanel();
-    const host = document.getElementById('cs-root-host');
-    host?.shadowRoot?.querySelector('#fab')?.click();
-  });  
-  
 
