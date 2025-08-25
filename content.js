@@ -1,6 +1,6 @@
 
 
-(async () => {
+ async function getTranscript() {
 
 
     const track = Array.from(document.querySelectorAll('track'))
@@ -35,7 +35,7 @@
     }).filter(Boolean);
   
     console.log(lines.join('\n'));
-  })();
+  }
 
 if (window.top === window) {
     createSummarizerPanel();
@@ -131,6 +131,8 @@ if (window.top === window) {
         .body {
           overflow: auto; padding: 12px;
           scrollbar-width: thin; scrollbar-color: #2d3342 transparent;
+          max-width: 100%;
+          box-sizing: border-box;
         }
   
         .empty {
@@ -169,7 +171,7 @@ if (window.top === window) {
           padding: 10px 12px; border-radius: 10px; box-shadow: var(--shadow);
           transform: translateY(8px); opacity: 0; transition: .2s ease;
         }
-        .toast.show { transform: translateY(0); opacity: 1; background: #cbd5ff; }
+        .toast.show { transform: translateY(0); opacity: 1; background: #cbd5ff ; }
   
         /* Skeleton loader */
         .skeleton { display: grid; gap: 10px; }
@@ -256,12 +258,20 @@ if (window.top === window) {
   
     fab.addEventListener('click', togglePanel);
     btnClose.addEventListener('click', togglePanel);
+
     btnSummarize.addEventListener('click', () => {
       setLoading(true);
-
-      window.dispatchEvent(new CustomEvent('CS_SUMMARIZE_CLICK'));
+      try {
+        const lectureTranscript = getTranscript();
+        console.log(lectureTranscript);
+      } catch (error) {
+        console.error('Error getting transcript:', error);
+      }
+      
       showToast('Summarizing…');
     });
+
+
     btnClear.addEventListener('click', clearUI);
     btnCopy.addEventListener('click', () => {
       const md = toMarkdown();
@@ -282,6 +292,8 @@ if (window.top === window) {
       const newW = Math.min(700, Math.max(300, startW + dx));
       host.style.width = newW + 'px';
       wrap.style.width = newW + 'px';
+
+      shadow.host.style.width.setProperty('--panel-w', newW + 'px');
     }
     function onStop() {
       resizing = false; document.removeEventListener('mousemove', onDrag); document.removeEventListener('mouseup', onStop);
@@ -292,7 +304,8 @@ if (window.top === window) {
       wrap.setAttribute('aria-hidden', opened ? 'false' : 'true');
       host.style.pointerEvents = opened ? 'auto' : 'none';
       // Initialize default width
-      if (!host.style.width) { host.style.width = getComputedStyle(shadow.host).getPropertyValue('--panel-w') || '380px'; }
+      //if (!host.style.width) { host.style.width = getComputedStyle(shadow.host).getPropertyValue('--panel-w') || '380px'; }
+      console.log("togglePanel", opened);
     }
   
     function setLoading(is) {
@@ -310,21 +323,7 @@ if (window.top === window) {
     }
   
     function renderSummary(data) {
-      tldr.textContent = data.tldr || '';
-      bullets.innerHTML = (data.bullets || []).map(b => {
-        const m = b.match(/^\[(\d+):(\d{2})]\s*(.*)$/);
-        const seek = m ? (parseInt(m[1],10)*60 + parseInt(m[2],10)) : null;
-        const content = m ? `[${m[1]}:${m[2]}] ${m[3]}` : b;
-        return `<li ${seek !== null ? `data-seek="${seek}" style="cursor:pointer"` : ''}>${escapeHtml(content)}</li>`;
-      }).join('');
-      quiz.innerHTML = (data.quiz || []).map(q => `<li>${escapeHtml(q)}</li>`).join('');
-  
-      bullets.addEventListener('click', (e) => {
-        const li = e.target.closest('li[data-seek]');
-        if (!li) return;
-        const seconds = Number(li.getAttribute('data-seek'));
-        window.postMessage({ type: 'CS_SEEK', seconds }, '*');
-      });
+      console.log("rendering summary");
   
       loading.style.display = 'none';
       error.style.display = 'none';
