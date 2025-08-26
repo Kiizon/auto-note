@@ -387,14 +387,29 @@ if (window.top === window) {
     
         const reply = data.choices[0].message.content;
         console.log('GPT Reply:', reply);
+        renderRaw(reply);
+
     
       } catch (error) {
         console.error('Error calling OpenAI:', error);
         showToast('Error summarizing.');
       } finally {
         setLoading(false);
+
       }
     });
+
+    function renderRaw(text) {
+      loading.style.display = 'none';
+      error.style.display = 'none';
+      empty.style.display = 'none';
+      result.style.display = 'block';
+    
+      // show raw in TL;DR for now
+      tldr.textContent = text;
+      bullets.innerHTML = '';
+      quiz.innerHTML = '';
+    }    
     
 
 
