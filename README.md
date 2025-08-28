@@ -1,65 +1,83 @@
-# Auto-Note Chrome Extension
+# Auto-Note
 
-A Chrome extension that automatically extracts captions/subtitles from D2L and formats them for easy reading and note-taking.
+Auto-Note is a Chrome extension that automatically extracts captions from D2L lecture videos and uses AI to generate concise summaries for quick review.
 
-**Note:** this project was made for personal purposes of learning how to create chrome extensions as well
-help learners summarize their lecture for quick reviews.
+## What It Does
+
+- 🎥 **Automatically detects** video captions on D2L pages
+- 📝 **Extracts transcript** with timestamps
+- 🤖 **AI-powered summarization** using OpenAI GPT
+- 📚 **Structured output** with key points and takeaways
+- ⌨️ **Quick access** via Shift+S hotkey
 
 ## Features
 
-- **Automatic Caption Detection**: Finds video caption tracks on TMU's d2l page
-- **Caption Parsing**: Converts VTT captions to readable timestamped text
-- **Easy Installation**: Simple setup process for Chrome users
+- **Caption Detection**: Finds and extracts video captions automatically
+- **AI Summarization**: Generates concise summaries using OpenAI API
+- **Structured Output**: Organizes content into summary, topics, and applications
+- **Keyboard Shortcut**: Press Shift+S to open/close the panel
+- **Resizable Panel**: Adjust panel width to fit your screen
+- **Local Storage**: Saves your API key for convenience
 
-## Installation Tutorial
+## Installation
 
-### Step 1: Download the Extension Files
+### 1. Download Files
+- Clone or download this repository
+- Ensure you have `manifest.json` and `content.js`
 
-1. Clone or download this repository to your computer
-2. Make sure you have these files in a folder:
-   - `manifest.json`
-   - `content.js`
+### 2. Load in Chrome
+1. Open Chrome and go to `chrome://extensions/`
+2. Enable **Developer Mode** (toggle in top-right)
+3. Click **"Load unpacked"**
+4. Select the folder containing your extension files
+5. The extension should appear in your extensions list
 
-### Step 2: Load the Extension in Chrome
+## Setup
 
-1. **Open Chrome** and navigate to `chrome://extensions/`
-2. **Enable Developer Mode** by toggling the switch in the top-right corner
-3. **Click "Load unpacked"** button
-4. **Select the folder** containing your extension files (`manifest.json` and `content.js`)
-5. **Click "Select Folder"**
+### 1. Get OpenAI API Key
+- Visit [OpenAI Platform](https://platform.openai.com/api-keys)
+- Create a new API key
+- Copy the key (starts with `sk-`)
 
-✅ **Success!** You should see "Auto-Note" appear in your extensions list.
-
-### Step 3: Verify Installation
-
-- Look for the extension icon in your Chrome toolbar
-- If you don't see it, click the puzzle piece icon and pin "Auto-Note"
+### 2. Enter API Key
+- Click the extension icon or press Shift+S
+- Enter your OpenAI API key in the input field
+- The key will be saved locally for future use
 
 ## How to Use
 
 ### Basic Usage
+1. **Navigate** to a D2L page with video content
+2. **Enable captions** on the video player (CC button)
+3. **Press Shift+S** or click the extension icon
+4. **Click "Summarize"** to generate AI summary
+5. **Review** the generated summary, key topics, and applications
 
-1. **Navigate to lecture webpage** with a video that has captions/subtitles
-2. **Make sure captions are enabled** on the video player
-3. **Shift + s to open summarizer panel** or click on the auto-note extension icon to open the panel
-4. **Press summarize!**  
+## Supported Platforms
 
+- **D2L (Desire2Learn)** lecture pages
+- Any HTML5 video with caption tracks
+- Chrome browser (desktop)
 
-### "No <track> found" Error in Console
-- Make sure the video has captions/subtitles enabled
-- Some videos may not have caption tracks available
-- Try refreshing the page and enabling captions again
+## Troubleshooting
 
-### Extension Not Working
-- Check that the extension is enabled in `chrome://extensions/`
-- Ensure you're on a page with HTML5 video
-- Try disabling and re-enabling the extension
+### "No captions found"
+- Ensure video has captions enabled
+- Check that captions are available for the video
+- Refresh the page and try again
 
-### Console Shows Nothing
-- Make sure you're looking at the Console tab in DevTools
-- Check that the page has video content with captions
-- Try navigating to a different video page
+### API Key Issues
+- Verify your API key starts with `sk-`
+- Check that you have sufficient OpenAI credits
+- Ensure the key is entered correctly
 
-**Happy learning!** 
+### Panel Not Opening
+- Try pressing Shift+S
+- Check if the extension is enabled
+- Reload the page if needed
+
+---
+
+**Happy learning!** 📚✨ 
 
 
