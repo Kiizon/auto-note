@@ -32,17 +32,6 @@ Auto-Note is a Chrome extension that automatically extracts captions from D2L le
 4. Select the folder containing your extension files
 5. The extension should appear in your extensions list
 
-## Setup
-
-### 1. Get OpenAI API Key
-- Visit [OpenAI Platform](https://platform.openai.com/api-keys)
-- Create a new API key
-- Copy the key (starts with `sk-`)
-
-### 2. Enter API Key
-- Click the extension icon or press Shift+S
-- Enter your OpenAI API key in the input field
-- The key will be saved locally for future use
 
 ## How to Use
 
@@ -53,28 +42,6 @@ Auto-Note is a Chrome extension that automatically extracts captions from D2L le
 4. **Click "Summarize"** to generate AI summary
 5. **Review** the generated summary, key topics, and applications
 
-## Supported Platforms
-
-- **D2L (Desire2Learn)** lecture pages
-- Any HTML5 video with caption tracks
-- Chrome browser (desktop)
-
-## Troubleshooting
-
-### "No captions found"
-- Ensure video has captions enabled
-- Check that captions are available for the video
-- Refresh the page and try again
-
-### API Key Issues
-- Verify your API key starts with `sk-`
-- Check that you have sufficient OpenAI credits
-- Ensure the key is entered correctly
-
-### Panel Not Opening
-- Try pressing Shift+S
-- Check if the extension is enabled
-- Reload the page if needed
 
 ---
 
