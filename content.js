@@ -139,7 +139,7 @@ if (window.top === window) {
         }
   
         .card {
-          background: #0e1118; border: 1px solid var(--border);
+          border: 1px solid var(--border);
           border-radius: var(--radius); padding: 12px; margin-bottom: 12px;
         }
         .card h4 { margin: 0 0 8px; font-size: 13px; color: #cfd6e6; letter-spacing: .2px; }
