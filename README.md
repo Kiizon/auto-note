@@ -43,8 +43,5 @@ Auto-Note is a Chrome extension that automatically extracts captions from D2L le
 5. **Review** the generated summary, key topics, and applications
 
 
----
-
-**Happy learning!** 📚✨ 
 
 
